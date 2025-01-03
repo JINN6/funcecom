@@ -28,7 +28,7 @@ const ContactUs = () => {
     }
 
     setErrorMessage("");
-    setSuccessMessage("Thank you for reaching out! We&#39;ll get back to you soon.");
+    setSuccessMessage("Thank you for reaching out! We'll get back to you soon.");
     setFormData({
       name: "",
       email: "",
@@ -38,21 +38,20 @@ const ContactUs = () => {
 
   return (
     <div>
-      <Navbar cart={[]} />
+      <Navbar cart={[]} /> {/* Ensure Navbar handles the cart prop */}
       <div className="relative min-h-screen py-6 bg-gray-50">
         <div className="container mx-auto px-4">
           <header className="flex flex-col items-center mb-12">
             <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">Contact Us</h1>
             <p className="text-xl text-gray-600 text-center mb-8">
-              We&#39;d love to hear from you. Whether you have a question or just want to say hello, feel free to reach out!
+              We'd love to hear from you. Whether you have a question or just want to say hello, feel free to reach out!
             </p>
           </header>
 
-          
           <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
             <h2 className="text-3xl font-semibold text-gray-800 mb-4 text-center sm:text-left">Get In Touch</h2>
             <p className="text-gray-600 mb-6 text-center sm:text-left">
-              We&#39;re here to help! If you have any questions or need assistance, please fill out the form below or contact us directly.
+              We're here to help! If you have any questions or need assistance, please fill out the form below or contact us directly.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -71,20 +70,15 @@ const ContactUs = () => {
             </div>
           </section>
 
-          
           <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
             <h2 className="text-3xl font-semibold text-gray-800 mb-6">Send Us A Message</h2>
 
             {successMessage && (
-              <div className="text-green-600 font-semibold mb-4">
-                {successMessage}
-              </div>
+              <div className="text-green-600 font-semibold mb-4">{successMessage}</div>
             )}
 
             {errorMessage && (
-              <div className="text-red-600 font-semibold mb-4">
-                {errorMessage}
-              </div>
+              <div className="text-red-600 font-semibold mb-4">{errorMessage}</div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
