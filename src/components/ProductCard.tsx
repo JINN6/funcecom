@@ -5,6 +5,7 @@ interface ProductCardProps {
   name: string;
   price: string;
   image: string;
+  quantity?: number;
   onAddToCart: (product: { id: number; name: string; price: string; image: string }) => void;
 }
 
