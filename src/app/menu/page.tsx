@@ -7,9 +7,13 @@ import Footer from "@/components/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+type CartItem = Product & {
+  quantity: number;
+};
+
 const Homee = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Product[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
@@ -44,13 +48,13 @@ const Homee = () => {
       const existingProduct = updatedCart.find((item) => item.id === product.id);
 
       if (existingProduct) {
-        existingProduct.quantity = (existingProduct.quantity || 1) + 1;
+        existingProduct.quantity += 1;
       } else {
         updatedCart.push({ ...product, quantity: 1 });
       }
 
       localStorage.setItem("cart", JSON.stringify(updatedCart));
-      setSuccessMessage(`${product.name} added to the cart!`);
+      setSuccessMessage(`${product.name} has been added to the cart!`);
       setTimeout(() => setSuccessMessage(""), 3000);
       return updatedCart;
     });
@@ -71,11 +75,7 @@ const Homee = () => {
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, product) => {
-      const price = parseFloat(product.price);
-      const quantity = product.quantity || 1;
-      return total + price * quantity;
-    }, 0);
+    return cart.reduce((total, product) => total + parseFloat(product.price) * product.quantity, 0);
   };
 
   const proceedToCheckout = () => {
@@ -83,14 +83,14 @@ const Homee = () => {
     localStorage.setItem("orderPlaced", "true");
     setCart([]);
     localStorage.removeItem("cart");
-    alert("Order has been placed! Thank you for shopping with us.");
+    alert("Your order has been placed! Thank you for shopping with us.");
   };
 
   const toggleCart = () => setShowCart((prev) => !prev);
 
   return (
     <div>
-      <Navbar cart={cart} />
+      <Navbar />
       <div className="relative min-h-screen py-6 bg-red-100">
         <div className="container mx-auto px-4">
           <header className="flex flex-col items-center mb-8" data-aos="fade-up">
