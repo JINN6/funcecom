@@ -1,12 +1,11 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import ProductCard from "../../components/ProductCards";
 import { Product } from "@/pages/types";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Homee = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -14,16 +13,23 @@ const Homee = () => {
   const [showCart, setShowCart] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
-  const router = useRouter();
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
 
-    async function fetchProducts() {
-      const response = await fetch("/api/products");
-      const data = await response.json();
-      setProducts(data);
-    }
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/products");
+        if (!response.ok) {
+          throw new Error("Failed to fetch products.");
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     fetchProducts();
 
     const savedCart = localStorage.getItem("cart");
@@ -38,7 +44,7 @@ const Homee = () => {
       const existingProduct = updatedCart.find((item) => item.id === product.id);
 
       if (existingProduct) {
-        existingProduct.quantity = existingProduct.quantity + 1;
+        existingProduct.quantity = (existingProduct.quantity || 1) + 1;
       } else {
         updatedCart.push({ ...product, quantity: 1 });
       }
@@ -124,7 +130,9 @@ const Homee = () => {
                             value={product.quantity}
                             min="1"
                             className="w-12 p-2 border rounded-md text-center"
-                            onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
+                            onChange={(e) =>
+                              handleQuantityChange(product.id, parseInt(e.target.value))
+                            }
                           />
                           <span className="text-gray-800 font-semibold">₹ {product.price}</span>
                           <button

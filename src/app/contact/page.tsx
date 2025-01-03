@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,7 +7,7 @@ const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: ""
+    message: "",
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,7 +16,7 @@ const ContactUs = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -28,11 +28,11 @@ const ContactUs = () => {
     }
 
     setErrorMessage("");
-    setSuccessMessage("Thank you for reaching out! We will get back to you soon.");
+    setSuccessMessage("Thank you for reaching out! We&#39;ll get back to you soon.");
     setFormData({
       name: "",
       email: "",
-      message: ""
+      message: "",
     });
   };
 
@@ -44,14 +44,15 @@ const ContactUs = () => {
           <header className="flex flex-col items-center mb-12">
             <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">Contact Us</h1>
             <p className="text-xl text-gray-600 text-center mb-8">
-              We'd love to hear from you. Whether you have a question or just want to say hello, feel free to reach out!
+              We&#39;d love to hear from you. Whether you have a question or just want to say hello, feel free to reach out!
             </p>
           </header>
 
+          
           <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
             <h2 className="text-3xl font-semibold text-gray-800 mb-4 text-center sm:text-left">Get In Touch</h2>
             <p className="text-gray-600 mb-6 text-center sm:text-left">
-              We're here to help! If you have any questions or need assistance, please fill out the form below or contact us directly.
+              We&#39;re here to help! If you have any questions or need assistance, please fill out the form below or contact us directly.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -70,24 +71,7 @@ const ContactUs = () => {
             </div>
           </section>
 
-          <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6">Frequently Asked Questions</h2>
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">How can I contact support?</h3>
-                <p className="text-gray-600">You can contact our support team via email at support@yourdomain.com or by phone at +123 456 7890.</p>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">Where are you located?</h3>
-                <p className="text-gray-600">Our office is located at 123 Your Address, City, Country. Feel free to drop by if you're in the area!</p>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">How long does it take to get a response?</h3>
-                <p className="text-gray-600">We typically respond within 24 hours during business days. For urgent matters, please call us directly.</p>
-              </div>
-            </div>
-          </section>
-
+          
           <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
             <h2 className="text-3xl font-semibold text-gray-800 mb-6">Send Us A Message</h2>
 
@@ -142,18 +126,6 @@ const ContactUs = () => {
                 </button>
               </div>
             </form>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-semibold text-gray-800 text-center mb-6">Find Us on the Map</h2>
-            <div className="relative w-full h-96">
-              <iframe
-                className="w-full h-full rounded-lg"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.2952464708144!2d144.95605431532414!3d-37.817209279751464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d5d2b08e5d9%3A0x5b7b1ea5ad7f2f16!2sMelbourne%20Central!5e0!3m2!1sen!2sau!4v1645162214971!5m2!1sen!2sau"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
           </section>
 
           <Footer />

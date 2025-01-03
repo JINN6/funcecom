@@ -1,27 +1,23 @@
-"use client"
-import Image from "next/image";
+"use client";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import { Grape } from "lucide-react";
 import Footer from "@/components/Footer";
 import Menuitem from "@/components/Menuitem";
-import ProductCard from "@/components/ProductCards";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default function Home() {
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Initialize AOS with a 1-second animation duration
+    AOS.init({ duration: 1000 });
   }, []);
 
   return (
     <div className="min-h-screen overflow-y-auto">
       <Navbar />
 
-      {/* First Section */}
       <section className="h-auto w-full lg:h-screen flex flex-col lg:flex-row items-center justify-between px-6 lg:px-[5%] py-8 lg:py-0">
-        {/* Image Section */}
         <div
           className="flex-1 flex justify-center items-center mb-8 lg:mb-0 lg:order-1"
           data-aos="fade-left"
@@ -32,8 +28,6 @@ export default function Home() {
             className="w-[70%] sm:w-[80%] lg:w-[80%] rounded-full"
           />
         </div>
-
-        {/* Content Section */}
         <div className="flex-1 text-center lg:text-left" data-aos="fade-right">
           <div className="w-[70%] sm:w-[80%] lg:w-[40%] mx-auto lg:mx-0 bg-red-100 text-center text-red-500 py-2 rounded-[20px] flex justify-center items-center">
             More than Faster <Grape />
@@ -64,7 +58,6 @@ export default function Home() {
 
       <Menuitem />
 
-      {/* Second Section */}
       <section
         className="w-full h-auto py-16 mt-20 lg:mt-0 bg-red-100 px-4 sm:px-6 lg:px-8"
         data-aos="fade-up"
@@ -77,9 +70,7 @@ export default function Home() {
           Delivery Partner
         </h1>
 
-        {/* Flex Container */}
         <div className="flex flex-wrap justify-center sm:justify-evenly pt-14 gap-8">
-          {/* First Card */}
           <div
             className="bg-white w-full sm:w-[45%] md:w-[30%] lg:w-[25%] h-[320px] rounded-[10px] p-4 mb-6"
             data-aos="flip-left"
@@ -98,7 +89,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Second Card */}
           <div
             className="bg-white w-full sm:w-[45%] md:w-[30%] lg:w-[25%] h-[320px] rounded-[10px] p-4 mb-6"
             data-aos="flip-up"
@@ -117,7 +107,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Third Card */}
           <div
             className="bg-white w-full sm:w-[45%] md:w-[30%] lg:w-[25%] h-[320px] rounded-[10px] p-4 mb-6"
             data-aos="flip-right"
@@ -138,7 +127,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

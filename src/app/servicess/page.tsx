@@ -1,5 +1,5 @@
 "use client"
-import {  useEffect } from "react";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AOS from 'aos';
@@ -8,8 +8,8 @@ import 'aos/dist/aos.css';
 const ServicesPage = () => {
   useEffect(() => {
     AOS.init({
-      duration: 1000, 
-      once: true, 
+      duration: 1000,
+      once: true,
     });
   }, []);
 
@@ -72,7 +72,7 @@ const ServicesPage = () => {
           <section className="bg-gray-100 p-8 rounded-lg shadow-lg mb-12" data-aos="fade-up">
             <h2 className="text-3xl font-semibold text-gray-800 text-center mb-6">Why Choose Us?</h2>
             <p className="text-lg text-gray-600 mb-6 text-center">
-              We are committed to delivering outstanding services with exceptional customer satisfaction. Here’s why you should choose us:
+              We are committed to delivering outstanding services with exceptional customer satisfaction. Here&rsquo;s why you should choose us:
             </p>
             <ul className="list-inside list-disc text-gray-600 space-y-4">
               <li className="text-xl">Expert team of professionals with years of experience in the industry.</li>
@@ -83,8 +83,8 @@ const ServicesPage = () => {
             </ul>
           </section>
           <section className="bg-black p-12 rounded-lg text-white text-center" data-aos="fade-up">
-            <h2 className="text-3xl font-semibold mb-6">Let’s Work Together</h2>
-            <p className="text-lg mb-6">Ready to take your business to the next level? Get in touch with us today and let's discuss how we can help!</p>
+            <h2 className="text-3xl font-semibold mb-6">Let&rsquo;s Work Together</h2>
+            <p className="text-lg mb-6">Ready to take your business to the next level? Get in touch with us today and let&rsquo;s discuss how we can help!</p>
             <button className="hover:bg-white hover:text-black border border-white bg-black text-white px-6 py-3 rounded-lg text-xl transition">Contact Us</button>
           </section>
         </div>
