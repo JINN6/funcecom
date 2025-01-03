@@ -2,25 +2,12 @@ import Link from "next/link";
 import { AlignRight } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-
-interface CartItem {
-  id: string;
-  name: string;
-  quantity: number;
-}
-
-
-interface NavbarProps {
-  cart?: CartItem[]; 
-}
-
-export default function Navbar({ cart }: NavbarProps) {
+export default function Navbar() {
   return (
     <div className="flex justify-between items-center gap-[40px] h-[65px] px-10">
       <h1 className="font-extrabold text-4xl">
         F<span className="text-red-500">OO</span>D
       </h1>
-
 
       <ul className="hidden lg:flex gap-5">
         <li>
@@ -37,7 +24,6 @@ export default function Navbar({ cart }: NavbarProps) {
         </li>
       </ul>
 
- 
       <div className="lg:hidden">
         <Sheet>
           <SheetTrigger>
@@ -69,7 +55,6 @@ export default function Navbar({ cart }: NavbarProps) {
         </Sheet>
       </div>
 
- 
       <div className="hidden lg:flex items-center justify-center px-4 py-3">
         <Link href="/sign">
           <button className="ml-4 px-7 py-2 bg-red-500 rounded-[55px] text-white">
