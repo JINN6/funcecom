@@ -38,7 +38,7 @@ const ContactUs = () => {
 
   return (
     <div>
-      <Navbar /> {/* No cart prop passed */}
+      <Navbar />
       <div className="relative min-h-screen py-6 bg-gray-50">
         <div className="container mx-auto px-4">
           <header className="flex flex-col items-center mb-12">
