@@ -28,7 +28,7 @@ const ContactUs = () => {
     }
 
     setErrorMessage("");
-    setSuccessMessage("Thank you for reaching out! We'll get back to you soon.");
+    setSuccessMessage("Thank you for reaching out! We&apos;ll get back to you soon.");
     setFormData({
       name: "",
       email: "",
@@ -44,14 +44,14 @@ const ContactUs = () => {
           <header className="flex flex-col items-center mb-12">
             <h1 className="text-4xl font-bold text-gray-800 text-center mb-4">Contact Us</h1>
             <p className="text-xl text-gray-600 text-center mb-8">
-              We'd love to hear from you. Whether you have a question or just want to say hello, feel free to reach out!
+              We&apos;d love to hear from you. Whether you have a question or just want to say hello, feel free to reach out!
             </p>
           </header>
 
           <section className="bg-white shadow-lg rounded-lg p-8 mb-12">
             <h2 className="text-3xl font-semibold text-gray-800 mb-4 text-center sm:text-left">Get In Touch</h2>
             <p className="text-gray-600 mb-6 text-center sm:text-left">
-              We're here to help! If you have any questions or need assistance, please fill out the form below or contact us directly.
+              We&apos;re here to help! If you have any questions or need assistance, please fill out the form below or contact us directly.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
