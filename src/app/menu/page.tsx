@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import ProductCard from "../../components/ProductCards";
 import { Product } from "@/pages/types";
@@ -7,13 +8,9 @@ import Footer from "@/components/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-type CartItem = Product & {
-  quantity: number;
-};
-
 const Homee = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
   const [showCart, setShowCart] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
@@ -48,7 +45,7 @@ const Homee = () => {
       const existingProduct = updatedCart.find((item) => item.id === product.id);
 
       if (existingProduct) {
-        existingProduct.quantity += 1;
+        existingProduct.quantity = (existingProduct.quantity || 1) + 1;
       } else {
         updatedCart.push({ ...product, quantity: 1 });
       }
@@ -75,7 +72,10 @@ const Homee = () => {
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, product) => total + parseFloat(product.price) * product.quantity, 0);
+    return cart.reduce((total, product) => {
+      const price = typeof product.price === "string" ? parseFloat(product.price) : product.price;
+      return total + price * (product.quantity || 1);
+    }, 0);
   };
 
   const proceedToCheckout = () => {
@@ -83,14 +83,14 @@ const Homee = () => {
     localStorage.setItem("orderPlaced", "true");
     setCart([]);
     localStorage.removeItem("cart");
-    alert("Your order has been placed! Thank you for shopping with us.");
+    alert("Order has been placed! Thank you for shopping with us.");
   };
 
   const toggleCart = () => setShowCart((prev) => !prev);
 
   return (
     <div>
-      <Navbar />
+      <Navbar cart={cart} />
       <div className="relative min-h-screen py-6 bg-red-100">
         <div className="container mx-auto px-4">
           <header className="flex flex-col items-center mb-8" data-aos="fade-up">
