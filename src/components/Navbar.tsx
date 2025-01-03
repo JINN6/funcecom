@@ -2,7 +2,12 @@ import Link from "next/link";
 import { AlignRight } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-export default function Navbar() {
+// Define the prop type
+interface NavbarProps {
+  cart: Product[];  // Define the prop for cart, assuming Product is your type
+}
+
+const Navbar = ({ cart }: NavbarProps) => {
   return (
     <div className="flex justify-between items-center gap-[40px] h-[65px] px-10">
       <h1 className="font-extrabold text-4xl">
@@ -64,4 +69,6 @@ export default function Navbar() {
       </div>
     </div>
   );
-}
+};
+
+export default Navbar;
