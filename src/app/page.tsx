@@ -1,101 +1,145 @@
+"use client"
 import Image from "next/image";
+import Link from "next/link";
+import Navbar from "../components/Navbar";
+import { Grape } from "lucide-react";
+import Footer from "@/components/Footer";
+import Menuitem from "@/components/Menuitem";
+import ProductCard from "@/components/ProductCards";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Initialize AOS with a 1-second animation duration
+  }, []);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="min-h-screen overflow-y-auto">
+      <Navbar />
+
+      {/* First Section */}
+      <section className="h-auto w-full lg:h-screen flex flex-col lg:flex-row items-center justify-between px-6 lg:px-[5%] py-8 lg:py-0">
+        {/* Image Section */}
+        <div
+          className="flex-1 flex justify-center items-center mb-8 lg:mb-0 lg:order-1"
+          data-aos="fade-left"
+        >
+          <img
+            src="/ger.webp"
+            alt="Burger"
+            className="w-[70%] sm:w-[80%] lg:w-[80%] rounded-full"
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Content Section */}
+        <div className="flex-1 text-center lg:text-left" data-aos="fade-right">
+          <div className="w-[70%] sm:w-[80%] lg:w-[40%] mx-auto lg:mx-0 bg-red-100 text-center text-red-500 py-2 rounded-[20px] flex justify-center items-center">
+            More than Faster <Grape />
+          </div>
+          <h1 className="font-extrabold text-3xl sm:text-4xl lg:text-5xl mt-6">
+            Be The Fastest <br /> In Delivering <br /> Your{" "}
+            <span className="text-red-500">Food</span>
+          </h1>
+          <p className="mt-4 text-base sm:text-lg lg:text-lg">
+            Fresh, tasty, organic dishes with juicy flavors, crunchy <br />
+            textures, cheesy delights, savory aromas, healthy options, <br />
+            and zesty meals.
+          </p>
+          <div className="flex flex-col lg:flex-row gap-5 mt-6 justify-center lg:justify-start">
+            <Link href="/menu">
+              <button className="hover:bg-black px-7 py-2 bg-red-500 rounded-[55px] text-white">
+                Order Now
+              </button>
+            </Link>
+            <Link href="/menu">
+              <button className="hover:bg-black hover:text-white hover:border-black px-7 py-2 border-2 border-red-500 rounded-[55px]">
+                View
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Menuitem />
+
+      {/* Second Section */}
+      <section
+        className="w-full h-auto py-16 mt-20 lg:mt-0 bg-red-100 px-4 sm:px-6 lg:px-8"
+        data-aos="fade-up"
+      >
+        <h1 className="text-red-500 text-center text-xl sm:text-xl lg:text-2xl">
+          What we Serve
+        </h1>
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-center pt-4">
+          Your Favourite Food <br />
+          Delivery Partner
+        </h1>
+
+        {/* Flex Container */}
+        <div className="flex flex-wrap justify-center sm:justify-evenly pt-14 gap-8">
+          {/* First Card */}
+          <div
+            className="bg-white w-full sm:w-[45%] md:w-[30%] lg:w-[25%] h-[320px] rounded-[10px] p-4 mb-6"
+            data-aos="flip-left"
+          >
+            <img
+              className="rounded-full w-[120px] h-[120px] mx-auto"
+              src="/devboy.webp"
+              alt="Easy To Order"
+            />
+            <h1 className="font-bold text-[30px] text-center mt-10">
+              Easy To Order
+            </h1>
+            <p className="text-center">
+              The sun set, casting beautiful <br />
+              colors across skies.
+            </p>
+          </div>
+
+          {/* Second Card */}
+          <div
+            className="bg-white w-full sm:w-[45%] md:w-[30%] lg:w-[25%] h-[320px] rounded-[10px] p-4 mb-6"
+            data-aos="flip-up"
+          >
+            <img
+              className="rounded-full w-[120px] h-[120px] mx-auto"
+              src="/book.jpg"
+              alt="Fastest Delivery"
+            />
+            <h1 className="font-bold text-[30px] text-center mt-10">
+              Fastest Delivery
+            </h1>
+            <p className="text-center">
+              The sun set, casting beautiful <br />
+              colors across skies.
+            </p>
+          </div>
+
+          {/* Third Card */}
+          <div
+            className="bg-white w-full sm:w-[45%] md:w-[30%] lg:w-[25%] h-[320px] rounded-[10px] p-4 mb-6"
+            data-aos="flip-right"
+          >
+            <img
+              className="rounded-full w-[120px] h-[120px] mx-auto"
+              src="/wqaiter.jpg"
+              alt="Best Quality"
+            />
+            <h1 className="font-bold text-[30px] text-center mt-10">
+              Best Quality
+            </h1>
+            <p className="text-center">
+              The sun set, casting beautiful <br />
+              colors across skies.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
