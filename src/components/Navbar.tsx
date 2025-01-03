@@ -2,12 +2,11 @@ import Link from "next/link";
 import { AlignRight } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-// Define the prop type
 interface NavbarProps {
-  cart: Product[];  // Define the prop for cart, assuming Product is your type
+  cart?: Product[]; // Make the cart prop optional
 }
 
-const Navbar = ({ cart }: NavbarProps) => {
+const Navbar: React.FC<NavbarProps> = ({ cart }) => {
   return (
     <div className="flex justify-between items-center gap-[40px] h-[65px] px-10">
       <h1 className="font-extrabold text-4xl">
