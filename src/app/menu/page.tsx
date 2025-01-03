@@ -41,15 +41,7 @@ const Homee = () => {
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
-      const updatedCart = [...prevCart];
-      const existingProduct = updatedCart.find((item) => item.id === product.id);
-
-      if (existingProduct) {
-        existingProduct.quantity = (existingProduct.quantity || 1) + 1;
-      } else {
-        updatedCart.push({ ...product, quantity: 1 });
-      }
-
+      const updatedCart = [...prevCart, product];
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       setSuccessMessage(`${product.name} has been added to the cart!`);
       setTimeout(() => setSuccessMessage(""), 3000);
@@ -63,18 +55,10 @@ const Homee = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  const handleQuantityChange = (productId: number, newQuantity: number) => {
-    const updatedCart = cart.map((item) =>
-      item.id === productId ? { ...item, quantity: newQuantity } : item
-    );
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
-
   const calculateTotal = () => {
     return cart.reduce((total, product) => {
       const price = typeof product.price === "string" ? parseFloat(product.price) : product.price;
-      return total + price * (product.quantity || 1);
+      return total + price;
     }, 0);
   };
 
@@ -125,15 +109,6 @@ const Homee = () => {
                           <span className="text-gray-800">{product.name}</span>
                         </div>
                         <div className="flex items-center space-x-4">
-                          <input
-                            type="number"
-                            value={product.quantity}
-                            min="1"
-                            className="w-12 p-2 border rounded-md text-center"
-                            onChange={(e) =>
-                              handleQuantityChange(product.id, parseInt(e.target.value))
-                            }
-                          />
                           <span className="text-gray-800 font-semibold">₹ {product.price}</span>
                           <button
                             onClick={() => removeFromCart(product.id)}
