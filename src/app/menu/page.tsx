@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import ProductCard from "../../components/ProductCards";
-import { Product } from "@/pages/types";
-import Navbar from "@/components/Navbar";
+import { Product } from "@/pages/types"; // Ensure this is correctly imported
+import Navbar from "@/components/Navbar"; // Import Navbar component
 import Footer from "@/components/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -74,7 +74,7 @@ const Homee = () => {
 
   return (
     <div>
-      <Navbar cart={cart} />
+      <Navbar /> {/* Remove cart prop from here */}
       <div className="relative min-h-screen py-6 bg-red-100">
         <div className="container mx-auto px-4">
           <header className="flex flex-col items-center mb-8" data-aos="fade-up">
