@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -29,21 +29,12 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 const SignUpPage = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    acceptTerms: false,
-  });
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: formData,
   });
 
   useEffect(() => {
