@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+// Define schema for form validation using zod
 const formSchema = z.object({
   name: z
     .string()
@@ -40,8 +41,6 @@ const SignUpPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    watch,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: formData,
@@ -50,14 +49,6 @@ const SignUpPage = () => {
   useEffect(() => {
     AOS.init({ once: true });
   }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
 
   const onSubmit = (data: FormData) => {
     if (data.password !== data.confirmPassword) {
