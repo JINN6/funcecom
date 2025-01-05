@@ -1,12 +1,34 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+const formSchema = z.object({
+  name: z
+    .string()
+    .min(3, "Name must be at least 3 characters long")
+    .max(20, "Name must be at most 20 characters long"),
+  email: z.string().email("Invalid email address"),
+  password: z
+    .string()
+    .min(11, "Password must be at least 11 characters long")
+    .max(20, "Password must be at most 20 characters long"),
+  confirmPassword: z
+    .string()
+    .min(11, "Confirm Password must be at least 11 characters long")
+    .max(20, "Confirm Password must be at most 20 characters long"),
+  acceptTerms: z.boolean().refine(val => val === true, "You must accept the terms and conditions"),
+});
+
+type FormData = z.infer<typeof formSchema>;
+
 const SignUpPage = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     password: "",
@@ -14,8 +36,19 @@ const SignUpPage = () => {
     acceptTerms: false,
   });
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    watch,
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: formData,
+  });
+
   useEffect(() => {
-    AOS.init({ once: true }); 
+    AOS.init({ once: true });
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,14 +59,9 @@ const SignUpPage = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
+  const onSubmit = (data: FormData) => {
+    if (data.password !== data.confirmPassword) {
       alert("Passwords do not match!");
-      return;
-    }
-    if (!formData.acceptTerms) {
-      alert("You must accept the terms and conditions!");
       return;
     }
     alert("Account created successfully!");
@@ -44,7 +72,6 @@ const SignUpPage = () => {
       <Navbar />
       <div className="relative min-h-screen py-12 bg-gray-50">
         <div className="container mx-auto px-6">
-         
           <header
             className="mb-12 text-center"
             data-aos="fade-down"
@@ -56,14 +83,12 @@ const SignUpPage = () => {
             </p>
           </header>
 
-         
           <section
             className="bg-white p-8 rounded-lg shadow-lg max-w-lg mx-auto"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <form onSubmit={handleSubmit}>
-             
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-6">
                 <label
                   htmlFor="name"
@@ -74,16 +99,13 @@ const SignUpPage = () => {
                 <input
                   type="text"
                   id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
+                  {...register("name")}
                   className="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Enter your full name"
-                  required
                 />
+                {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
               </div>
 
-            
               <div className="mb-6">
                 <label
                   htmlFor="email"
@@ -94,16 +116,13 @@ const SignUpPage = () => {
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
+                  {...register("email")}
                   className="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Enter your email"
-                  required
                 />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
               </div>
 
-              
               <div className="mb-6">
                 <label
                   htmlFor="password"
@@ -114,16 +133,13 @@ const SignUpPage = () => {
                 <input
                   type="password"
                   id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
+                  {...register("password")}
                   className="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Enter your password"
-                  required
                 />
+                {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
               </div>
 
-            
               <div className="mb-6">
                 <label
                   htmlFor="confirmPassword"
@@ -134,16 +150,15 @@ const SignUpPage = () => {
                 <input
                   type="password"
                   id="confirmPassword"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
+                  {...register("confirmPassword")}
                   className="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                   placeholder="Confirm your password"
-                  required
                 />
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>
+                )}
               </div>
 
-              
               <div className="mb-6">
                 <label
                   htmlFor="acceptTerms"
@@ -152,9 +167,7 @@ const SignUpPage = () => {
                   <input
                     type="checkbox"
                     id="acceptTerms"
-                    name="acceptTerms"
-                    checked={formData.acceptTerms}
-                    onChange={handleInputChange}
+                    {...register("acceptTerms")}
                     className="text-blue-600 focus:ring-blue-600"
                   />
                   <span className="text-sm">
@@ -168,9 +181,9 @@ const SignUpPage = () => {
                     .
                   </span>
                 </label>
+                {errors.acceptTerms && <p className="text-red-500 text-sm">{errors.acceptTerms.message}</p>}
               </div>
 
-            
               <div className="flex justify-center mb-6">
                 <button
                   type="submit"
@@ -183,7 +196,6 @@ const SignUpPage = () => {
               </div>
             </form>
 
-          
             <div className="mt-6 text-center">
               <p className="text-gray-600">
                 Already have an account?{" "}
@@ -197,7 +209,6 @@ const SignUpPage = () => {
             </div>
           </section>
 
-        
           <section
             className="mt-16 bg-gray-100 p-8 rounded-lg shadow-lg"
             data-aos="fade-up"

@@ -2,11 +2,7 @@ import Link from "next/link";
 import { AlignRight } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-interface NavbarProps {
-  cart?: Product[]; // Make the cart prop optional
-}
-
-const Navbar: React.FC<NavbarProps> = ({ cart }) => {
+const Navbar: React.FC = () => {
   return (
     <div className="flex justify-between items-center gap-[40px] h-[65px] px-10">
       <h1 className="font-extrabold text-4xl">
