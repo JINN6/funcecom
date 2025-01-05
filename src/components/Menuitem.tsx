@@ -1,11 +1,20 @@
-"use client"
+"use client";
+
 import React, { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 
-const ProductCardGrid = () => {
-  const [cart, setCart] = useState([]);
+// Define the type for the product
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+}
 
-  const products = [
+const ProductCardGrid = () => {
+  const [cart, setCart] = useState<Product[]>([]);
+
+  const products: Product[] = [
     {
       id: 1,
       name: "Pepperoni Pizza",
@@ -44,11 +53,11 @@ const ProductCardGrid = () => {
     },
   ];
 
-  const addToCart = (product) => {
+  const addToCart = (product: Product) => {
     setCart((prevCart) => [...prevCart, product]);
   };
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = (productId: number) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
   };
 
