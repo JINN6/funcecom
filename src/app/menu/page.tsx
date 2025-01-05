@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ProductCard from "../../components/ProductCards";
-import { Product } from "@/pages/types"; // Ensure this is correctly imported
+import { Product } from "@/lib/types"; // Ensure this is correctly imported
 import Navbar from "@/components/Navbar"; // Import Navbar component
 import Footer from "@/components/Footer";
 import AOS from "aos";
